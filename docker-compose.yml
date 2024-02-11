@@ -1,0 +1,38 @@
+---
+version: '3'
+ 
+services:
+  db:
+    image: mariadb
+    volumes:
+      - ./db:/var/lib/mysql:rw
+    restart: always
+    networks:
+      - default
+    environment:
+      MYSQL_ROOT_PASSWORD: chevereto_password_root # 
+      MYSQL_DATABASE: chevereto # 
+      MYSQL_USER: chevereto # 
+      MYSQL_PASSWORD: chevereto_password # 
+ 
+  app:
+    image: nmtan/chevereto:1.4.1 # 
+    restart: always
+    ports:
+      - 8080:80 # 
+    networks:
+      - default
+    environment:
+      CHEVERETO_DB_HOST: db
+      CHEVERETO_DB_NAME: chevereto # 
+      CHEVERETO_DB_USERNAME: chevereto # 
+      CHEVERETO_DB_PASSWORD: chevereto_password # 
+    volumes:
+      - ./app/images:/var/www/html/images:rw
+      - ./app/php.ini:/usr/local/etc/php/php.ini:ro
+    depends_on:
+      - db
+ 
+networks:
+  default:
+    name: chevereto
