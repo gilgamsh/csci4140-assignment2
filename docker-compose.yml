@@ -16,7 +16,7 @@ services:
       MYSQL_PASSWORD: chevereto_password # 
  
   app:
-    image: nmtan/chevereto:1.6.2 # 
+    image: nmtan/chevereto # 
     restart: always
     ports:
       - 8080:80 # 
