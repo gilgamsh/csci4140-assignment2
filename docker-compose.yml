@@ -4,8 +4,6 @@ version: '3'
 services:
   db:
     image: mariadb
-    volumes:
-      - ./db:/var/lib/mysql:rw
     restart: always
     networks:
       - default
@@ -27,9 +25,6 @@ services:
       CHEVERETO_DB_NAME: chevereto # 
       CHEVERETO_DB_USERNAME: chevereto # 
       CHEVERETO_DB_PASSWORD: chevereto_password # 
-    volumes:
-      - ./app/images:/var/www/html/images:rw
-      - ./app/php.ini:/usr/local/etc/php/php.ini:ro
     depends_on:
       - db
  
