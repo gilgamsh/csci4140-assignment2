@@ -6,7 +6,8 @@ services:
     image: mariadb
     restart: always
     networks:
-      - default
+      mynetwork:
+        ipv4_address: 10.0.2.3
     environment:
       MYSQL_ROOT_PASSWORD: chevereto_password_root # 
       MYSQL_DATABASE: chevereto # 
@@ -19,7 +20,9 @@ services:
     ports:
       - 8080:80 # 
     networks:
-      - default
+      mynetwork:
+        ipv4_address: 10.0.2.2
+      
     environment:
       CHEVERETO_DB_HOST: db
       CHEVERETO_DB_NAME: chevereto # 
@@ -31,3 +34,8 @@ services:
 networks:
   default:
     name: chevereto
+  mynetwork:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 10.0.2.0/24
